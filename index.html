@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Authentication Forms (Single Page)</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+    .container{
+      width: 520px;
+      margin: 0 auto;
+      background:#fff;
+      border:1px solid #ccc;
+      padding:20px;
+      border-radius:6px;
+    }
+    h2{ text-align:center; margin:0 0 15px 0; }
+
+    .tabs{
+      display:flex;
+      gap:8px;
+      margin-bottom:15px;
+    }
+    .tab{
+      flex:1;
+      padding:10px;
+      border:1px solid #ccc;
+      background:#eee;
+      cursor:pointer;
+      border-radius:4px;
+      font-weight:bold;
+    }
+    .tab.active{
+      background:#dbeafe;
+      border-color:#93c5fd;
+    }
+
+    .panel{ display:none; }
+    .panel.active{ display:block; }
+
+    .field{ margin-bottom:12px; }
+    label{ display:block; margin-bottom:5px; font-size:14px; }
+
+    .form-control{
+      width:100%;
+      padding:10px;
+      border:1px solid #bbb;
+      border-radius:4px;
+    }
+    textarea{ resize:none; }
+
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin:8px 0;
+      font-size:14px;
+    }
+
+    .btn{
+      width:100%;
+      padding:10px;
+      border:none;
+      background:#2563eb;
+      color:white;
+      border-radius:4px;
+      cursor:pointer;
+      font-weight:bold;
+    }
+    .btn:hover{ background:#1d4ed8; }
+
+    .btn-secondary{
+      width:100%;
+      padding:10px;
+      border:1px solid #bbb;
+      background:#f2f2f2;
+      border-radius:4px;
+      cursor:pointer;
+      margin-top:8px;
+      font-weight:bold;
+    }
+
+    .note{
+      font-size:12px;
+      color:#444;
+      background:#fafafa;
+      border:1px dashed #ccc;
+      padding:8px;
+      border-radius:4px;
+      margin-top:10px;
+    }
+
+    a{ color:#2563eb; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>User Authentication Forms</h2>
+
+    <!-- Tabs (IMPORTANT: type="button") -->
+    <div class="tabs">
+      <button type="button" class="tab active" data-target="login">Login</button>
+      <button type="button" class="tab" data-target="signup">Signup</button>
+      <button type="button" class="tab" data-target="change">Change</button>
+      <button type="button" class="tab" data-target="forgot">Forgot</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="login" class="panel active">
+      <h3>Login</h3>
+      <form onsubmit="return false;">
+        <div class="field">
+          <label>Email</label>
+          <input class="form-control" type="email" placeholder="Enter Email" required>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <input class="form-control" type="password" placeholder="Enter Password" required>
+        </div>
+
+        <div class="row">
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input type="checkbox"> Remember me
+          </label>
+          <a href="#" id="goForgot">Forgot password?</a>
+        </div>
+
+        <button class="btn" type="submit">Login</button>
+      </form>
+    </div>
+
+    <!-- SIGNUP -->
+    <div id="signup" class="panel">
+      <h3>Signup</h3>
+      <form onsubmit="return false;">
+        <div class="field">
+          <label>Full Name</label>
+          <input class="form-control" type="text" placeholder="Enter Full Name" required>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input class="form-control" type="email" placeholder="Enter Email" required>
+        </div>
+
+        <div class="field">
+          <label>Create Password</label>
+          <input class="form-control" type="password" placeholder="Create Password" required>
+        </div>
+
+        <div class="field">
+          <label>Date of Birth</label>
+          <input class="form-control" type="date" required>
+        </div>
+
+        <div class="field">
+          <label>Gender</label>
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input type="radio" name="gender" required> Male
+          </label>
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input type="radio" name="gender"> Female
+          </label>
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input type="radio" name="gender"> Other
+          </label>
+        </div>
+
+        <div class="field">
+          <label>Country</label>
+          <select class="form-control" required>
+            <option value="">Select</option>
+            <option>India</option>
+            <option>USA</option>
+            <option>UK</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Upload Photo</label>
+          <input class="form-control" type="file" accept="image/*">
+        </div>
+
+        <div class="field">
+          <label>Address</label>
+          <textarea class="form-control" rows="3" placeholder="Enter Address"></textarea>
+        </div>
+
+        <label style="display:flex; gap:6px; align-items:center; font-size:14px;">
+          <input type="checkbox" required> Accept Terms
+        </label>
+
+        <button class="btn" type="submit">Create Account</button>
+        <button class="btn-secondary" type="reset">Reset</button>
+      </form>
+    </div>
+
+    <!-- CHANGE PASSWORD -->
+    <div id="change" class="panel">
+      <h3>Change Password</h3>
+      <form onsubmit="return false;">
+        <div class="field">
+          <label>Current Password</label>
+          <input class="form-control" type="password" placeholder="Current Password" required>
+        </div>
+
+        <div class="field">
+          <label>New Password</label>
+          <input class="form-control" type="password"
+                 placeholder="New Password"
+                 pattern="(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{8,}"
+                 title="Min 8 chars, 1 uppercase, 1 number, 1 special character"
+                 required>
+        </div>
+
+        <div class="field">
+          <label>Confirm New Password</label>
+          <input class="form-control" type="password" placeholder="Confirm Password" required>
+        </div>
+
+        <button class="btn" type="submit">Update Password</button>
+
+        <div class="note">
+          New password rule: 8+ chars, 1 uppercase, 1 number, 1 special character.
+        </div>
+      </form>
+    </div>
+
+    <!-- FORGOT PASSWORD -->
+    <div id="forgot" class="panel">
+      <h3>Forgot Password</h3>
+      <form onsubmit="return false;">
+        <div class="field">
+          <label>Registered Email</label>
+          <input class="form-control" type="email" placeholder="Enter Registered Email" required>
+        </div>
+
+        <button class="btn-secondary" type="button">Send OTP</button>
+
+        <div class="field">
+          <label>OTP</label>
+          <input class="form-control" type="number" placeholder="Enter OTP" required>
+        </div>
+
+        <div class="field">
+          <label>New Password</label>
+          <input class="form-control" type="password" placeholder="New Password" required>
+        </div>
+
+        <div class="field">
+          <label>Confirm Password</label>
+          <input class="form-control" type="password" placeholder="Confirm Password" required>
+        </div>
+
+        <button class="btn" type="submit">Reset Password</button>
+      </form>
+    </div>
+
+
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".panel");
+
+    function openPanel(id){
+      panels.forEach(p => p.classList.remove("active"));
+      const target = document.getElementById(id);
+      if (target) target.classList.add("active");
+
+      tabs.forEach(t => t.classList.remove("active"));
+      const activeTab = document.querySelector(`.tab[data-target="${id}"]`);
+      if (activeTab) activeTab.classList.add("active");
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => openPanel(tab.dataset.target));
+    });
+
+    // Forgot link opens Forgot panel
+    document.getElementById("goForgot").addEventListener("click", function(e){
+      e.preventDefault();
+      openPanel("forgot");
+    });
+
+    // Default
+    openPanel("login");
+  </script>
+</body>
+</html>
